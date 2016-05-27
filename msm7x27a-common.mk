@@ -84,6 +84,11 @@ PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_keyboarddecoder.so:system/lib/libjni_keyboarddecoder.so \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_unbundled_latinimegoogle.so:system/lib/libjni_unbundled_latinimegoogle.so
 
+# Use script to fix some GAPPS
+# Since some users are ... i dont need to say
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/rootdir/system/etc/init.d/99googlelatinimefix:system/etc/init.d/99googlelatinimefix
+
 # Display HAL
 PRODUCT_PACKAGES += \
     gralloc.msm7x27a \
