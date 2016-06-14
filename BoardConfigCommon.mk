@@ -112,12 +112,28 @@ BOARD_SEPOLICY_DIRS += \
        device/lge/msm7x27a-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-       device.te \
-       app.te \
-       file_contexts \
        untrusted_app.te \
        vold.te \
-       zygote.te
+	file_contexts \
+	app.te \
+	bluetooth.te \
+	device.te \
+	domain.te \
+	drmserver.te \
+	file.te \
+	hci_init.te \
+	healthd.te \
+	init.te \
+	init_shell.te \
+	keystore.te \
+	kickstart.te \
+	mediaserver.te \
+	netd.te \
+	rild.te \
+	surfaceflinger.te \
+	system.te \
+	ueventd.te \
+	wpa_supplicant.te
 
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_HAS_QCOM_WLAN_SDK          := true
