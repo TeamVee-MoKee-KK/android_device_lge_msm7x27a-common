@@ -126,10 +126,6 @@ PRODUCT_PACKAGES += \
     libaudioparameter \
     libaudio-resampler
 
-# Light HAL
-PRODUCT_PACKAGES += \
-    lights.msm7x27a
-
 # BT HAL
 PRODUCT_PACKAGES += \
     libbt-vendor
