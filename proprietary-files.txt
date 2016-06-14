@@ -2,7 +2,11 @@ bin/netmgrd
 bin/qmuxd
 bin/rild
 bin/rmt_storage
+bin/sensord
+lib/hw/nfc.msm7x27a.so
 lib/libauth.so
+lib/libchromatix_hi542_default_video.so
+lib/libchromatix_hi542_preview.so
 lib/libcm.so
 lib/libdiag.so
 lib/libdsi_netctrl.so
@@ -34,3 +38,4 @@ lib/libwcnftm.so
 lib/libwfcu.so
 lib/libwms.so
 lib/libwmsts.so
+vendor/firmware/libpn544_fw.so
