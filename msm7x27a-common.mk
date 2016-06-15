@@ -20,18 +20,11 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 DEVICE_PACKAGE_OVERLAYS += device/lge/msm7x27a-common/overlay
 
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/rootdir/root/init.lge.shared.rc:root/init.lge.shared.rc \
     device/lge/msm7x27a-common/rootdir/root/init.lge.usb.rc:root/init.lge.usb.rc
 
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
     device/lge/msm7x27a-common/rootdir/system/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl
-
-PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/rootdir/system/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
-    device/lge/msm7x27a-common/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    device/lge/msm7x27a-common/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    device/lge/msm7x27a-common/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
