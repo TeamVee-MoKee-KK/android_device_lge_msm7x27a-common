@@ -39,14 +39,11 @@ on init
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
 
-    # Torch perms
-    chown system camera /sys/devices/platform/i2c-gpio.3/i2c-3/3-0030/brightness_uA
-    chmod 0777 /sys/devices/platform/i2c-gpio.3/i2c-3/3-0030/brightness_uA
-
 on fs
     mkdir /persist 0771 system system
     mkdir /persist-lg  0771 system system
     mkdir /mpt 0771 system system
+    mkdir /cust 0771 system system
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
@@ -60,6 +57,10 @@ on fs
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p23
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1 errors=continue
 
+    wait /dev/block/platform/msm_sdcc.3/by-num/p25
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1 errors=continue
+
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
@@ -67,11 +68,6 @@ on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
-
-    mkdir /data/tombstones 0771 system system
-
-    chown system system /sys/bus/i2c/drivers/proximity_gp2ap/6-0044/enable
-    chmod 0660 /sys/bus/i2c/drivers/proximity_gp2ap/6-0044/enable
 
     mkdir /data/misc/wifi 0775 wifi radio
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -88,14 +84,6 @@ on post-fs-data
 
     # Sensors daemon stuff
     mkdir /data/misc/sensor 2755 system compass
-
-    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
-    chmod 0771 /persist
-
-    chown system system /mpt
-    chmod 0771 /mpt
 
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
@@ -135,10 +123,6 @@ on post-fs-data
 
     mkdir /data/audio 0770 media audio
 
-    # NFC
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
-
     # Create directories for wiper services
     mkdir /data/wpstiles/ 0755 shell
     mkdir /data/wiper 0755 location qcom_oncrpc
@@ -154,63 +138,74 @@ on post-fs-data
     chmod 0666 /data/misc/wifi/fwpath
 
 on boot
-    start qcamerasvr
-
-    # CMHW Permission
+    # allow system to modify Vibration
+    chown system system /sys/class/timed_output/vibrator/voltage
     chmod 0777 /sys/class/timed_output/vibrator/voltage
+
+    # Set Read Ahead to 1024kb
+    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+    write /sys/block/mmcblk1/queue/read_ahead_kb 1024
+
+    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /dev/ttyHS0
+    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /dev/ttyHS0
+
+    # Create QMUX deamon socket area
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    mkdir /dev/socket/qmux_audio 0770 media audio
+    mkdir /dev/socket/qmux_radio 0770 radio radio
+    mkdir /dev/socket/qmux_gps 0770 gps gps
+    chmod 2770 /dev/socket/qmux_bluetooth
+    chmod 2770 /dev/socket/qmux_audio
+    chmod 2770 /dev/socket/qmux_radio
+    chmod 2770 /dev/socket/qmux_gps
 
     # bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
-    chown system system /sys/module/sco/parameters/disable_esco
-    chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
+
+    chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-    chmod 0660 /proc/bluetooth/sleep/proto
-    chown bluetooth bluetooth /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
-    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    chown system system /sys/module/sco/parameters/disable_esco
+
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
 
-    # port-bridge
     chmod 0660 /dev/smd0
     chown system system /dev/smd0
 
-    # Remove write permissions to video related nodes
-    chmod 0664 /sys/devices/virtual/graphics/fb1/hpd
-    chmod 0664 /sys/devices/virtual/graphics/fb1/video_mode
-    chmod 0664 /sys/devices/virtual/graphics/fb1/format_3d
+    chmod 0660 /dev/smd11
+    chown system system /dev/smd11
 
-    # Change owner and group for media server and surface flinger
-    chown media system /sys/devices/virtual/graphics/fb1/format_3d
+    chmod 0660 /dev/ttyGS0
+    chown system system /dev/ttyGS0
 
-    # Change permissions for fps_level nodes
-    chown system graphics /sys/class/graphics/fb0/msm_fb_fps_level
-    chown system graphics /sys/class/graphics/fb1/msm_fb_fps_level
-    chown system graphics /sys/class/graphics/fb2/msm_fb_fps_level
-    chmod 644 /sys/class/graphics/fb0/msm_fb_fps_level
-    chmod 400 /sys/class/graphics/fb1/msm_fb_fps_level
-    chmod 400 /sys/class/graphics/fb2/msm_fb_fps_level
+    chown system system /dev/atcmd-tty0
+    chmod 0660 /dev/atcmd-tty0
+
+    chown system system /dev/atcmd-tty1
+    chmod 0660 /dev/atcmd-tty1
+
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
+
+    # Chown polling nodes as needed from UI running on system server
+    chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chown system system /sys/devices/platform/msm_sdcc.4/polling
 
     # For netmgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/usb_composite/rmnet_smd_sdio/transport
-
-    # Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    chmod 2770 /dev/socket/qmux_radio
-    mkdir /dev/socket/qmux_audio 0770 media audio
-    chmod 2770 /dev/socket/qmux_audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    chmod 2770 /dev/socket/qmux_bluetooth
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-    chmod 2770 /dev/socket/qmux_gps
 
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
@@ -252,6 +247,15 @@ on boot
     chown system system /sys/class/leds/lcd-backlight/alc
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
 
+    chown root radio /dev/block/mmcblk0p6
+    chown root system /dev/block/mmcblk0p8
+    chmod 0770 /dev/block/mmcblk0p6
+    chmod 0770 /dev/block/mmcblk0p8
+
+    chmod 0777 /dev/input/event0
+    chmod 0777 /dev/input/event5
+    chmod 0777 /dev/input/event3
+
     # rmt-storage
     chown system system /sys/devices/platform/rs300000a7.65536/send_sync
     chmod 0764 /sys/devices/platform/rs300000a7.65536/send_sync
@@ -261,13 +265,7 @@ on boot
     chown system /sys/devices/platform/rs300100a7.65536/force_sync
     chown system /sys/devices/platform/rs300100a7.65536/sync_sts
 
-    chown root system /sys/devices/platform/mdp.524801/kcal
-    chmod 0664 /sys/devices/platform/mdp.524801/kcal
-    restorecon /sys/devices/platform/mdp.524801/kcal
-
-    chown system system /sys/class/leds/button-backlight/max_brightness
-    chmod 0664 /sys/class/leds/button-backlight/max_brightnes
-    restorecon /sys/class/leds/button-backlight/max_brightnes
+    start qcamerasvr
 
 # start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
@@ -310,13 +308,6 @@ service sensord /system/bin/sensord
     class core
     oneshot
 
-# Triggered by the KEY_VOLUME_DOWN+KEY_MENU keycodes
-service bugreport /system/bin/logwrapper /system/bin/dumpstate -d -v -o /storage/sdcard0/bugreports/bugreport
-    keycodes 114 139
-    class main
-    disabled
-    oneshot
-
 # WLAN
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
@@ -347,18 +338,6 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-
-on property:init.svc.wpa_supplicant=stopped
-    stop dhcpcd
-
-on property:wlan.driver.status=loading
-    write /sys/devices/platform/msm_sdcc.2/polling 1
-on property:wlan.driver.status=failed
-    write /sys/devices/platform/msm_sdcc.2/polling 0
-on property:wlan.driver.status=unloaded
-    write /sys/devices/platform/msm_sdcc.2/polling 0
-on property:wlan.driver.status=ok
-    write /sys/devices/platform/msm_sdcc.2/polling 0
 
 service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
     class late_start
@@ -410,3 +389,22 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     group root
     oneshot
     disabled
+
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
+
+on property:wlan.driver.status=loading
+    write /sys/devices/platform/msm_sdcc.2/polling 1
+
+on property:wlan.driver.status=failed
+    write /sys/devices/platform/msm_sdcc.2/polling 0
+
+on property:wlan.driver.status=unloaded
+    write /sys/devices/platform/msm_sdcc.2/polling 0
+
+on property:wlan.driver.status=ok
+    write /sys/devices/platform/msm_sdcc.2/polling 0
+
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale 1
+
