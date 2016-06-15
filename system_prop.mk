@@ -58,3 +58,7 @@ PRODUCT_PROPERTY_OVERRIDES += persist.radio.apm_sim_not_pwdn="1"
 # Debug
 PRODUCT_PROPERTY_OVERRIDES += debug.gralloc.map_fb_memory="1"
 PRODUCT_PROPERTY_OVERRIDES += debug.hwc.fakevsync="1"
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += audio.offload.disable="1"
+# Resampler quality
+PRODUCT_PROPERTY_OVERRIDES += af.resampler.quality="4"
