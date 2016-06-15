@@ -24,9 +24,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/root/init.lge.usb.rc:root/init.lge.usb.rc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
-
-PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
     $(LOCAL_PATH)/rootdir/system/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl
 
@@ -75,8 +72,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm7x27a \
     copybit.msm7x27a \
     libqdMetaData \
-    memtrack.msm7x27a \
-    hwcomposer.msm7x27a
+    memtrack.msm7x27a
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
