@@ -39,38 +39,26 @@ on init
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
 
-    exec /sbin/setup_fs \
-        /dev/block/platform/msm_sdcc.3/by-num/p20 \
-        /dev/block/platform/msm_sdcc.3/by-num/p16 \
-        /dev/block/platform/msm_sdcc.3/by-num/p18 \
-        /dev/block/platform/msm_sdcc.3/by-num/p23 \
-        no_reboot
-
     # Torch perms
     chown system camera /sys/devices/platform/i2c-gpio.3/i2c-3/3-0030/brightness_uA
     chmod 0777 /sys/devices/platform/i2c-gpio.3/i2c-3/3-0030/brightness_uA
 
 on fs
-
     mkdir /persist 0771 system system
     mkdir /persist-lg  0771 system system
     mkdir /mpt 0771 system system
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
-    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p15 /persist nosuid nodev barrier=1
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p15 /persist nosuid nodev barrier=1 errors=continue
 
-    wait /dev/block/platform/msm_sdcc.3/by-num/p16
-    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p16
-    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p16 /cache nosuid nodev barrier=1
-    
     wait /dev/block/platform/msm_sdcc.3/by-num/p18
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p18
-    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p18 /persist-lg nosuid nodev barrier=1
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p18 /persist-lg nosuid nodev barrier=1 errors=continue
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p23
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p23
-    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1 errors=continue
 
     setprop ro.crypto.fuse_sdcard true
 
