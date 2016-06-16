@@ -26,6 +26,7 @@
 # inherit from the proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 
+# Vendor
 BOARD_VENDOR := lge
 
 # Compiler flags
@@ -38,11 +39,13 @@ COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
 ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
 
+# Platform
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := 7x27
 TARGET_BOARD_PLATFORM := msm7x27a
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
+# Arch
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
@@ -51,25 +54,17 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a9
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x1200000
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
 
-# L7 have only 562MB (589299712) with latest V20 (need confirmation)
-# and
-# L5 have only 600MB (629575516) with latest V20 too (need confirmation)
-# Use the lowest size due to "common" name
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 589299712
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 2920577761
-BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
+# Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_VOLD_MAX_PARTITIONS := 23
 TARGET_USERIMAGES_USE_EXT4 := true
 
-# QCOM  display stuffs
+# QCOM Display Stuff
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 TARGET_QCOM_DISPLAY_VARIANT := caf
@@ -77,6 +72,7 @@ USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_QCOM_BSP := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
+TARGET_NO_INITLOGO := true
 
 # Media 
 TARGET_QCOM_MEDIA_VARIANT := caf
@@ -84,41 +80,59 @@ TARGET_QCOM_MEDIA_VARIANT := caf
 # Add QC Video Enhancements flag
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
-# bluetooth
+# Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 
-# audio 
+# Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
+# GPS
 BOARD_USES_QCOM_GPS := true
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7x27a
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
+# Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
+# Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 
-TARGET_NO_INITLOGO := true
-
+# Light
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Hardware
 BOARD_HARDWARE_CLASS := device/lge/msm7x27a-common/cmhw
 
-BOARD_SEPOLICY_DIRS += \
-       device/lge/msm7x27a-common/sepolicy
-
+# SEPolicy
+BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
 BOARD_SEPOLICY_UNION += \
-       device.te \
-       app.te \
-       file_contexts \
        untrusted_app.te \
        vold.te \
-       zygote.te
+	file_contexts \
+	app.te \
+	bluetooth.te \
+	device.te \
+	domain.te \
+	drmserver.te \
+	file.te \
+	hci_init.te \
+	healthd.te \
+	init.te \
+	init_shell.te \
+	keystore.te \
+	kickstart.te \
+	mediaserver.te \
+	netd.te \
+	rild.te \
+	surfaceflinger.te \
+	system.te \
+	ueventd.te \
+	wpa_supplicant.te
 
+# WLAN
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_HAS_QCOM_WLAN_SDK          := true
 BOARD_WLAN_DEVICE                := qcwcn

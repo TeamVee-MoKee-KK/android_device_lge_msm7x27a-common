@@ -14,5 +14,5 @@
 # limitations under the License.
 
 ifeq ($(LGE_PROJECT),l)
-include $(call first-makefiles-under,$(call my-dir))
+include $(call all-makefiles-under,$(call my-dir))
 endif
