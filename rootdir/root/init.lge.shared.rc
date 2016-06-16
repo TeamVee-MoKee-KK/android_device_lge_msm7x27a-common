@@ -43,22 +43,21 @@ on fs
     swapon_all fstab.lge.shared
 
     mkdir /persist 0771 system system
-    mkdir /persist-lg  0771 system system
-    mkdir /mpt 0771 system system
-    mkdir /cust 0771 system system
-
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p15 /persist nosuid nodev barrier=1 errors=continue
 
+    mkdir /persist-lg  0771 system system
     wait /dev/block/platform/msm_sdcc.3/by-num/p18
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p18
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p18 /persist-lg nosuid nodev barrier=1 errors=continue
 
+    mkdir /mpt 0771 system system
     wait /dev/block/platform/msm_sdcc.3/by-num/p23
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p23
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1 errors=continue
 
+    mkdir /cust 0771 system system
     wait /dev/block/platform/msm_sdcc.3/by-num/p25
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1 errors=continue
@@ -66,20 +65,19 @@ on fs
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
-    mkdir /data/radio 0770 radio radio
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
-    chown media_rw media_rw /data/media
+
+    mkdir /data/radio 0770 radio radio
 
     mkdir /data/misc/wifi 0775 wifi radio
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+
     mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
 
     # Create the directory used by CnE subsystem
     mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -87,19 +85,18 @@ on post-fs-data
     # Sensors daemon stuff
     mkdir /data/misc/sensor 2755 system compass
 
-    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
-
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
 
-    chmod 0664 /sys/devices/platform/msm-battery/chg_current_change
     chown system system /sys/devices/platform/msm-battery/chg_current_change
+    chmod 0664 /sys/devices/platform/msm-battery/chg_current_change
 
     # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
@@ -125,10 +122,6 @@ on post-fs-data
 
     mkdir /data/audio 0770 media audio
 
-    # Create directories for wiper services
-    mkdir /data/wpstiles/ 0755 shell
-    mkdir /data/wiper 0755 location qcom_oncrpc
-
     # Create directories for gpsone_daemon services
     mkdir /data/misc/gpsone_d 0770 gpsone_d qcom_oncrpc
 
@@ -149,22 +142,19 @@ on boot
     write /sys/block/mmcblk1/queue/read_ahead_kb 1024
 
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /dev/ttyHS0
 
     # Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    mkdir /dev/socket/qmux_audio 0770 media audio
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-    chmod 2770 /dev/socket/qmux_bluetooth
-    chmod 2770 /dev/socket/qmux_audio
-    chmod 2770 /dev/socket/qmux_radio
-    chmod 2770 /dev/socket/qmux_gps
+    mkdir /dev/socket/qmux_bluetooth 2770 bluetooth bluetooth
+    mkdir /dev/socket/qmux_audio 2770 media audio
+    mkdir /dev/socket/qmux_radio 2770 radio radio
+    mkdir /dev/socket/qmux_gps 2770 gps gps
 
     # bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -177,17 +167,17 @@ on boot
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
-    chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
+    chmod 0660 /dev/ttyHS2
 
-    chmod 0660 /dev/smd0
     chown system system /dev/smd0
+    chmod 0660 /dev/smd0
 
-    chmod 0660 /dev/smd11
     chown system system /dev/smd11
+    chmod 0660 /dev/smd11
 
-    chmod 0660 /dev/ttyGS0
     chown system system /dev/ttyGS0
+    chmod 0660 /dev/ttyGS0
 
     chown system system /dev/atcmd-tty0
     chmod 0660 /dev/atcmd-tty0
@@ -195,16 +185,15 @@ on boot
     chown system system /dev/atcmd-tty1
     chmod 0660 /dev/atcmd-tty1
 
-    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
-
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/platform/msm_sdcc.1/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chown system system /sys/devices/platform/msm_sdcc.2/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chown system system /sys/devices/platform/msm_sdcc.3/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
+    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
 
     # For netmgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/usb_composite/rmnet_smd_sdio/transport
@@ -245,66 +234,42 @@ on boot
     # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
-    chmod 0664 /sys/class/leds/lcd-backlight/alc
     chown system system /sys/class/leds/lcd-backlight/alc
+    chmod 0664 /sys/class/leds/lcd-backlight/alc
+
+    chown system system /sys/class/leds/lcd-backlight/brightness
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
 
     chown root radio /dev/block/mmcblk0p6
-    chown root system /dev/block/mmcblk0p8
     chmod 0770 /dev/block/mmcblk0p6
+
+    chown root system /dev/block/mmcblk0p8
     chmod 0770 /dev/block/mmcblk0p8
 
     chmod 0777 /dev/input/event0
     chmod 0777 /dev/input/event5
     chmod 0777 /dev/input/event3
 
-    # rmt-storage
+    # RMT-Storage
     chown system system /sys/devices/platform/rs300000a7.65536/send_sync
     chmod 0764 /sys/devices/platform/rs300000a7.65536/send_sync
 
-    chown system /sys/devices/platform/rs300000a7.65536/force_sync
-    chown system /sys/devices/platform/rs300000a7.65536/sync_sts
-    chown system /sys/devices/platform/rs300100a7.65536/force_sync
-    chown system /sys/devices/platform/rs300100a7.65536/sync_sts
+    chown system system /sys/devices/platform/rs300000a7.65536/force_sync
+    chown system system /sys/devices/platform/rs300000a7.65536/sync_sts
+    chown system system /sys/devices/platform/rs300100a7.65536/force_sync
+    chown system system /sys/devices/platform/rs300100a7.65536/sync_sts
 
     start qcamerasvr
 
-# start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet audio
 
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-    disabled
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-on property:ro.fuse_sdcard=true
-    start sdcard
-
-# Binding fuse mount point to /storage/emulated/legacy
-on property:init.svc.sdcard=running
-    wait /mnt/shell/emulated/0
-    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
-
-# This will make sure that sdcard service starts as late_start.
-on nonencrypted
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
-on property:vold.decrypt=trigger_restart_framework
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
     disabled
-
-on property:ro.boot.emmc=true
-    start rmt_storage
 
 service sensord /system/bin/sensord
     class core
@@ -392,8 +357,34 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     oneshot
     disabled
 
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+    class late_start
+    disabled
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+on property:ro.fuse_sdcard=true
+    start sdcard
+
+# Binding fuse mount point to /storage/emulated/legacy
+on property:init.svc.sdcard=running
+    wait /mnt/shell/emulated/0
+    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
+
+# This will make sure that sdcard service starts as late_start.
+on nonencrypted
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
+on property:vold.decrypt=trigger_restart_framework
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
+
+on property:ro.boot.emmc=true
+    start rmt_storage
 
 on property:wlan.driver.status=loading
     write /sys/devices/platform/msm_sdcc.2/polling 1
@@ -409,4 +400,3 @@ on property:wlan.driver.status=ok
 
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale 1
-

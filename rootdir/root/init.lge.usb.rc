@@ -23,6 +23,9 @@ on boot
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
 
+on charger
+    setprop sys.usb.config charge_only
+
 # MTP
 on property:sys.usb.config=mtp
     stop abdb
@@ -200,6 +203,3 @@ on property:sys.usb.config=charge_only,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state ${sys.usb.config}
-
-on charger
-    setprop sys.usb.config charge_only
