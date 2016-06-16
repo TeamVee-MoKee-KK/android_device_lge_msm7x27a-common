@@ -127,4 +127,72 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbt-vendor
 
-include device/lge/msm7x27a-common/system_prop.mk
+# For userdebug builds
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.secure="false" \
+    ro.adb.secure="false"
+endif
+
+# USB
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config="mtp"
+
+# QCOM
+PRODUCT_PROPERTY_OVERRIDES += \
+    com.qc.hardware="true" \
+    ro.vendor.extension_library="/system/lib/libqc-opt.so"
+
+# OpenGL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version="131072"
+
+# WiFi
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface="wlan0"
+
+# Display Composition
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.composition.type="dyn" \
+    persist.hwc.mdpcomp.enable="false"
+
+# Use Hardware Rendering
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw="1"
+
+# Media StageFright
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.enable-player="true" \
+    media.stagefright.enable-meta="false" \
+    media.stagefright.enable-scan="true" \
+    media.stagefright.enable-http="true" \
+    media.stagefright.enable-fma2dp="true" \
+    media.stagefright.enable-aac="true" \
+    media.stagefright.enable-qcp="true"
+
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ril.subscription.types="NV,RUIM" \
+    ro.telephony.call_ring.multiple="false" \
+    ro.telephony.call_ring="false" \
+    ro.telephony.default_network="0" \
+    rild.libpath="/system/lib/libril-qc-qmi-1.so"
+
+# Data
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.use_data_netmgrd="true" \
+    persist.data.ds_fmc_app.mode="0"
+
+# SIM
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.service.factory.enable="0" \
+    persist.radio.apm_sim_not_pwdn="1"
+# Debug
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.gralloc.map_fb_memory="1" \
+    debug.hwc.fakevsync="1"
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.disable="1" \
+    af.resampler.quality="4"
