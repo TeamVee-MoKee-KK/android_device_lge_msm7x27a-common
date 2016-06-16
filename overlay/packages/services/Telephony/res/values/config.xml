@@ -24,5 +24,4 @@
 
     <bool name="send_mic_mute_to_AudioManager">true</bool>
 
-
 </resources>

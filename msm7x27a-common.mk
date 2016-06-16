@@ -127,8 +127,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libbt-vendor
 
-# Enable Torch
-PRODUCT_PACKAGES += \
-    Torch
-
 include device/lge/msm7x27a-common/system_prop.mk
