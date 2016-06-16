@@ -134,6 +134,10 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure="false"
 endif
 
+# SDCard
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+     ro.fuse_sdcard="true"
+
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config="mtp"
@@ -187,6 +191,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.service.factory.enable="0" \
     persist.radio.apm_sim_not_pwdn="1"
+
 # Debug
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.gralloc.map_fb_memory="1" \
