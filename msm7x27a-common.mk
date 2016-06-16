@@ -20,6 +20,7 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 DEVICE_PACKAGE_OVERLAYS += device/lge/msm7x27a-common/overlay
 
 PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/rootdir/root/fstab.lge.shared:root/fstab.lge.shared \
     device/lge/msm7x27a-common/rootdir/root/init.lge.shared.rc:root/init.lge.shared.rc \
     device/lge/msm7x27a-common/rootdir/root/init.lge.usb.rc:root/init.lge.usb.rc
 

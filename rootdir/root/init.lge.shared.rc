@@ -40,6 +40,8 @@ on init
     symlink /storage/sdcard1 /mnt/extSdCard
 
 on fs
+    swapon_all fstab.lge.shared
+
     mkdir /persist 0771 system system
     mkdir /persist-lg  0771 system system
     mkdir /mpt 0771 system system
