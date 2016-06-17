@@ -137,7 +137,7 @@ endif
 
 # SDCard
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-     ro.fuse_sdcard="true"
+    persist.fuse_sdcard="true"
 
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
