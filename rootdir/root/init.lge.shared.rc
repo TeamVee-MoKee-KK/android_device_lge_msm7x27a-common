@@ -263,7 +263,7 @@ on boot
 
     # Enable adaptive LMK and set vmpressure_file_min
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 40042
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 2884
 
     # Set per_process_reclaim tuning parameters
     write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
