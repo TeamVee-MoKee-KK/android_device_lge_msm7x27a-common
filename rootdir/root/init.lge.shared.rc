@@ -39,6 +39,8 @@ on init
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
 
+    write /sys/block/zram0/comp_algorithm lz4
+
 on fs
     swapon_all fstab.lge.shared
 
@@ -258,6 +260,17 @@ on boot
     chown system system /sys/devices/platform/rs300000a7.65536/sync_sts
     chown system system /sys/devices/platform/rs300100a7.65536/force_sync
     chown system system /sys/devices/platform/rs300100a7.65536/sync_sts
+
+    # Enable adaptive LMK and set vmpressure_file_min
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 40042
+
+    # Set per_process_reclaim tuning parameters
+    write /sys/module/process_reclaim/parameters/enable_process_reclaim 1
+    write /sys/module/process_reclaim/parameters/pressure_min 50
+    write /sys/module/process_reclaim/parameters/per_swap_size 512
+    write /sys/module/process_reclaim/parameters/pressure_max 70
+    write /sys/module/process_reclaim/parameters/swap_opt_eff 30
 
     start qcamerasvr
 
