@@ -10,6 +10,10 @@ ifneq ($(strip $(QCOM_ANC_HEADSET_ENABLED)),false)
     common_cflags += -DQCOM_ANC_HEADSET_ENABLED
 endif
 
+ifeq ($(strip $(NEW_INPUT_AUDIO_HAL)),true)
+    common_cflags += -DNEW_INPUT_AUDIO_HAL
+endif
+
 ifeq ($(strip $(QCOM_FM_ENABLED)),true)
     common_cflags += -DQCOM_FM_ENABLED
 endif
