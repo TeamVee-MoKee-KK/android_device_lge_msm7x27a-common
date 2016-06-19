@@ -25,8 +25,8 @@ PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/root/init.lge.usb.rc:root/init.lge.usb.rc
 
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    device/lge/msm7x27a-common/system/etc/media_codecs.xml:system/etc/media_codecs.xml
+    device/lge/msm7x27a-common/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    device/lge/msm7x27a-common/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml
 
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
