@@ -203,6 +203,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Data
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd="true" \
+    persist.data.netmgrd.qos.enable="true" \
     persist.data.ds_fmc_app.mode="0"
 
 # SIM
@@ -217,8 +218,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable="1" \
-    af.resampler.quality="4"
+    audio.offload.disable="1"
 
 # Force Camera Portability API, since newer camera API isn't supported.
 PRODUCT_PROPERTY_OVERRIDES += \
