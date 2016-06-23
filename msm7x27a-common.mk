@@ -116,8 +116,7 @@ PRODUCT_PACKAGES += \
 # EXT4
 PRODUCT_PACKAGES += \
     make_ext4fs \
-    e2fsck \
-    setup_fs
+    e2fsck
 
 # Usb
 PRODUCT_PACKAGES += \
