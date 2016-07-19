@@ -18,10 +18,6 @@ ifneq ($(strip $(QCOM_PROXY_DEVICE_ENABLED)),false)
     common_cflags += -DQCOM_PROXY_DEVICE_ENABLED
 endif
 
-ifneq ($(strip $(QCOM_OUTPUT_FLAGS_ENABLED)),false)
-    common_cflags += -DQCOM_OUTPUT_FLAGS_ENABLED
-endif
-
 ifeq ($(strip $(BOARD_USES_SRS_TRUEMEDIA)),true)
   common_cflags += -DSRS_PROCESSING
 endif
@@ -70,38 +66,5 @@ LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 include $(BUILD_SHARED_LIBRARY)
-
-ifeq ($(USE_LEGACY_AUDIO_POLICY), 1)
-# The audio policy is implemented on top of legacy policy code
-include $(CLEAR_VARS)
-
-LOCAL_CFLAGS += $(common_cflags)
-
-LOCAL_SRC_FILES := \
-    AudioPolicyManager.cpp \
-    audio_policy_hal.cpp
-
-LOCAL_SHARED_LIBRARIES := \
-    libcutils \
-    libutils \
-    libmedia
-
-LOCAL_STATIC_LIBRARIES := \
-    libaudiohw_legacy \
-    libmedia_helper \
-    libaudiopolicy_legacy
-
-LOCAL_MODULE := audio_policy.msm7x27a
-LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-LOCAL_MODULE_TAGS := optional
-
-LOCAL_C_INCLUDES := hardware/libhardware_legacy/audio
-
-LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
-LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
-
-include $(BUILD_SHARED_LIBRARY)
-
-endif
 
 include $(LOCAL_PATH)/policy_hal/Android.mk
