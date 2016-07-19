@@ -145,6 +145,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+# Adreno
+PRODUCT_PACKAGES += \
+    libstlport
+
 # For userdebug builds
 ifeq ($(TARGET_BUILD_VARIANT),userdebug)
 ADDITIONAL_DEFAULT_PROPERTIES += \
