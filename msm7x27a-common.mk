@@ -78,6 +78,12 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
+# Use Prebuilt GoogleLatinIME
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_4.1.23163.2622203.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
+    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_keyboarddecoder.so:system/lib/libjni_keyboarddecoder.so \
+    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_unbundled_latinimegoogle.so:system/lib/libjni_unbundled_latinimegoogle.so
+
 # Display HAL
 PRODUCT_PACKAGES += \
     gralloc.msm7x27a \
