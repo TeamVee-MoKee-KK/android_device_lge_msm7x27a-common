@@ -200,6 +200,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple="false" \
     ro.telephony.call_ring="false" \
     ro.telephony.default_network="0" \
+    ro.telephony.ril_class="JSRQualcommRIL" \
+    ro.telephony.ril.config="qcomdsds,skippinpukcount,simactivation" \
     rild.libpath="/system/lib/libril-qc-qmi-1.so"
 
 # Data
