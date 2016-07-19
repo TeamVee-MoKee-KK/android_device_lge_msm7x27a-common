@@ -162,10 +162,6 @@ endif
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard="true"
 
-# USB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config="mtp"
-
 # QCOM
 PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware="true" \
