@@ -78,14 +78,22 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
-# Use Prebuilt GoogleLatinIME
+# Use Prebuilt GoogleLatinIME for L5 and L7
+ifneq ($(filter e610 p700,$(TARGET_DEVICE)),)
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_4.1.23163.2622203.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_keyboarddecoder.so:system/lib/libjni_keyboarddecoder.so \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_unbundled_latinimegoogle.so:system/lib/libjni_unbundled_latinimegoogle.so
+endif
+
+# Use Prebuilt BlackPlayer and OpenCamera for L1II and L3II
+ifneq ($(filter v1 vee3,$(TARGET_DEVICE)),)
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/prebuilt/app/com.kodarkooperativet.blackplayerfree-2.22.apk:system/app/BlackPlayer/BlackPlayer.apk \
+    device/lge/msm7x27a-common/prebuilt/app/net.sourceforge.opencamera-1.28.1.apk:system/app/OpenCamera/OpenCamera.apk
+endif
 
 # Use script to fix some GAPPS
-# Since some users are ... i dont need to say
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/init.d/99googlelatinimefix:system/etc/init.d/99googlelatinimefix
 
