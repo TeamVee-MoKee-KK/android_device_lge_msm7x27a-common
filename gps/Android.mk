@@ -16,6 +16,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_BOARD_PLATFORM),msm7x27a)
+ifeq ($(USE_DEVICE_SPECIFIC_GPS),true)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
