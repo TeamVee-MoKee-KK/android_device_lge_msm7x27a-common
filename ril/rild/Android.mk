@@ -9,6 +9,9 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES:= \
 	rild.c
 
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../include \
+	$(TARGET_OUT_HEADERS)/libril
 
 LOCAL_SHARED_LIBRARIES := \
 	liblog \
@@ -21,8 +24,6 @@ LOCAL_CFLAGS := -DRIL_SHLIB
 LOCAL_MODULE:= rild
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/libril
-
 include $(BUILD_EXECUTABLE)
 
 # For radiooptions binary
@@ -31,6 +32,9 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES:= \
 	radiooptions.c
+
+LOCAL_C_INCLUDES += \
+	$(LOCAL_PATH)/../include
 
 LOCAL_SHARED_LIBRARIES := \
 	liblog \

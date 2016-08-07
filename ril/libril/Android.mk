@@ -10,6 +10,9 @@ LOCAL_SRC_FILES:= \
     ril.cpp \
     ril_event.cpp
 
+LOCAL_C_INCLUDES += \
+    $(LOCAL_PATH)/../include
+
 LOCAL_SHARED_LIBRARIES := \
     liblog \
     libutils \
