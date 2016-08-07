@@ -3395,8 +3395,8 @@ extern "C" void RIL_setcallbacks (const RIL_RadioFunctions *callbacks, int clien
     memcpy(&s_callbacks[client_id], callbacks, sizeof (RIL_RadioFunctions));
 }
 
-extern "C" void
-RIL_register (const RIL_RadioFunctions *callbacks, int client_id) {
+extern "C" void RIL_register (const RIL_RadioFunctions *callbacks,
+                              int client_id) {
     int ret;
     int flags;
     char prop_name[120];
@@ -3741,6 +3741,12 @@ static bool is3gpp2(int radioTech) {
     }
 }
 
+extern "C" void RIL_onUnsolicitedResponse(int unsolResponse, void *data,
+                                          size_t datalen)
+{
+    RIL_onUnsolicitedSendResponse(unsolResponse, data, datalen, 0);
+}
+
 /* If RIL sends SIM states or RUIM states, store the voice radio
  * technology and subscription source information so that they can be
  * returned when telephony framework requests them
@@ -3782,16 +3788,8 @@ processRadioState(RIL_RadioState newRadioState, int client_id) {
     return newRadioState;
 }
 
-extern "C"
-void RIL_onUnsolicitedResponse(int unsolResponse, void *data,
-                                size_t datalen)
-{
-    RIL_onUnsolicitedSendResponse(unsolResponse, data, datalen, 0);
-}
-
-extern "C" void
-RIL_onUnsolicitedResponse2(int unsolResponse, void *data,
-                                size_t datalen)
+extern "C" void RIL_onUnsolicitedResponse2(int unsolResponse, void *data,
+                                           size_t datalen)
 {
     RIL_onUnsolicitedSendResponse(unsolResponse, data, datalen, 1);
 }

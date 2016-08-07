@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013  Rudolf Tammekivi <rtammekivi@gmail.com>
+ * Copyright (C) 2016  Caio Oliveira <caiooliveirafarias0@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,9 +33,6 @@ char bt_hardware_power_state_path[64];
 int bt_hardware_power(bool enable)
 {
 	char *value = enable ? "1" : "0";
-
-	if (bt_hardware_power_state_path == NULL)
-		return -1;
 
 	write_value(bt_hardware_power_state_path, value, 1);
 

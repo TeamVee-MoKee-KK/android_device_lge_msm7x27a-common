@@ -4558,14 +4558,6 @@ const RIL_RadioFunctions *RIL_Init(const struct RIL_Env *env, int argc, char **a
 #else /* RIL_SHLIB */
 
 /**
- * Call this once at startup to register notification routine
- *
- * @param callbacks user-specifed callback function
- */
-void RIL_register (const RIL_RadioFunctions *callbacks);
-
-
-/**
  *
  * RIL_onRequestComplete will return as soon as possible
  *
@@ -4579,17 +4571,6 @@ void RIL_register (const RIL_RadioFunctions *callbacks);
  */
 void RIL_onRequestComplete(RIL_Token t, RIL_Errno e,
                            void *response, size_t responselen);
-
-/**
- * @param unsolResponse is one of RIL_UNSOL_RESPONSE_*
- * @param data is pointer to data defined for that RIL_UNSOL_RESPONSE_*
- *     "data" is owned by caller, and should not be modified or freed by callee
- * @param datalen the length of data in byte
- */
-
-void RIL_onUnsolicitedResponse(int unsolResponse, const void *data,
-                                size_t datalen);
-
 
 /**
  * Call user-specifed "callback" function on on the same thread that
