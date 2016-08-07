@@ -78,13 +78,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
-# Use Prebuilt Google Keyboard for L5 and L7
-ifneq ($(filter e610 p700,$(TARGET_DEVICE)),)
-PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_5.1.23.127065177.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
-    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_delight4decoder.so:system/lib/libjni_delight4decoder.so
-endif
-
 # Use Prebuilt BlackPlayer and OpenCamera for L1II and L3II
 ifneq ($(filter v1 vee3,$(TARGET_DEVICE)),)
 PRODUCT_COPY_FILES += \
@@ -92,9 +85,10 @@ PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/prebuilt/app/net.sourceforge.opencamera-1.32.1.apk:system/app/OpenCamera/OpenCamera.apk
 endif
 
-# Use script to delete extracted lib
-# from Google KeyBoard of GAPPS
+# Use Prebuilt Google Keyboard
 PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_5.1.23.127065177.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
+    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_delight4decoder.so:system/lib/libjni_delight4decoder.so \
     device/lge/msm7x27a-common/rootdir/system/etc/init.d/99googlelatinimefix:system/etc/init.d/99googlelatinimefix
 
 # Display HAL
