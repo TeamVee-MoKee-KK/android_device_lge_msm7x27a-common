@@ -23,8 +23,6 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/msm7x27a-common/include
-
 # inherit from the proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 
@@ -144,7 +142,7 @@ BOARD_USES_LEGACY_MMAP := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # RIL
-BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril
+BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril/class
 BOARD_PROVIDES_LIBRIL := true
 BOARD_PROVIDES_RILD := true
 COMMON_GLOBAL_CFLAGS += -DRIL_SUPPORTS_SEEK
