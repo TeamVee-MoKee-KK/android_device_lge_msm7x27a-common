@@ -1,6 +1,9 @@
 # Copyright 2006 The Android Open Source Project
 
 LOCAL_PATH:= $(call my-dir)
+
+ifeq ($(BOARD_PROVIDES_LIBRIL),true)
+
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES:= \
@@ -19,3 +22,4 @@ LOCAL_CFLAGS :=
 LOCAL_MODULE:= libril
 
 include $(BUILD_SHARED_LIBRARY)
+endif
