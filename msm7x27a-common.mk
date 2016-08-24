@@ -13,7 +13,7 @@
 # limitations under the License.
 
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-$(call inherit-product, device/lge/msm7x27a-common/prebuilt.mk)
+$(call inherit-product, device/lge/msm7x27a-common/prebuilt/prebuilt.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
