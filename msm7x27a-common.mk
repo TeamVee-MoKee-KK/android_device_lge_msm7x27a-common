@@ -13,25 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product, device/lge/msm7x27a-common/prebuilt.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/msm7x27a-common/overlay
 
+# Common ramdisk
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/root/fstab.lge.shared:root/fstab.lge.shared \
     device/lge/msm7x27a-common/rootdir/root/init.lge.shared.rc:root/init.lge.shared.rc \
     device/lge/msm7x27a-common/rootdir/root/init.lge.usb.rc:root/init.lge.usb.rc
 
+# Common audio policy and media codecs
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/msm7x27a-common/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml
 
+# Common Keylayouts
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
     device/lge/msm7x27a-common/rootdir/system/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl
 
+# Overlays
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     device/lge/msm7x27a-common/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
@@ -78,12 +83,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml
 
-# Use Prebuilt BlackPlayer, OpenCamera and Google Keyboard for all
+# GAPPS
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/com.kodarkooperativet.blackplayerfree-2.27.apk:system/app/BlackPlayer/BlackPlayer.apk \
-    device/lge/msm7x27a-common/prebuilt/app/net.sourceforge.opencamera-1.32.1.apk:system/app/OpenCamera/OpenCamera.apk \
-    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_5.1.23.127065177.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
-    device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_delight4decoder.so:system/lib/libjni_delight4decoder.so \
     device/lge/msm7x27a-common/rootdir/system/etc/init.d/99googlelatinimefix:system/etc/init.d/99googlelatinimefix
 
 # Display HAL
