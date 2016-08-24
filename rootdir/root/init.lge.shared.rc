@@ -19,8 +19,6 @@ on early-init
     chmod 666 /proc/cmdline
 
 on init
-    mkdir /storage/sdcard1 0775 system system
-
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
