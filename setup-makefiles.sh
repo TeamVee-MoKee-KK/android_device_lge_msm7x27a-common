@@ -1,6 +1,5 @@
 #!/bin/bash
-# Copyright 2016 The Android Open Source Project
-# Copyright 2016 TeamHacklG
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +17,7 @@ OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 
 (cat << EOF) > $MAKEFILE
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,7 +76,7 @@ for FILE in `egrep -v '(^#|^$)' ../msm7x27a-common/proprietary-files.txt`; do
 done
 
 (cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -97,7 +96,7 @@ done
 EOF
 
 (cat << EOF) > ../../../$OUTDIR/BoardConfigVendor.mk
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -119,7 +118,7 @@ OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 
 (cat << EOF) > $MAKEFILE
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -160,7 +159,7 @@ for FILE in `egrep -v '(^#|^$)' ../msm7x27a-common/common-proprietary-files.txt`
 done
 
 (cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -180,7 +179,7 @@ done
 EOF
 
 (cat << EOF) > ../../../$OUTDIR/BoardConfigVendor.mk
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2013-2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
