@@ -14,7 +14,7 @@
 
 ifneq (exists, $(shell test -d $(TOP)/packages/apps/Eleven && echo exists))
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree-2.27.apk:system/app/BlackPlayer/BlackPlayer.apk
+    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_2.27.apk:system/app/BlackPlayer/BlackPlayer.apk
 endif
 
 ifneq (exists, $(shell test -d $(TOP)/packages/inputmethods/LatinIME && echo exists))
@@ -24,4 +24,4 @@ PRODUCT_COPY_FILES += \
 endif
 
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera-1.32.1.apk:system/app/OpenCamera/OpenCamera.apk
+    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.32.1.apk:system/app/OpenCamera/OpenCamera.apk
