@@ -336,8 +336,8 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 
 service qmuxd /system/bin/qmuxd
     class main
-    user radio
-    group radio audio bluetooth gps qcom_diag
+    user root
+    group radio audio bluetooth gps diag qcom_diag
 
 service netmgrd /system/bin/netmgrd
     class main
