@@ -121,10 +121,6 @@ on boot
     chown system system /sys/class/timed_output/vibrator/voltage
     chmod 0777 /sys/class/timed_output/vibrator/voltage
 
-    # Set Read Ahead to 1024kb
-    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
-    write /sys/block/mmcblk1/queue/read_ahead_kb 1024
-
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -256,6 +252,21 @@ on boot
     write /sys/module/process_reclaim/parameters/per_swap_size 512
     write /sys/module/process_reclaim/parameters/pressure_max 70
     write /sys/module/process_reclaim/parameters/swap_opt_eff 30
+
+    # Swapping 1 page at a time is ok
+    write /proc/sys/vm/page-cluster 0
+
+    # We really need this
+    write /proc/sys/vm/swappiness 100
+
+    # Flash storage isn't a good entropy source, and only causes
+    # locking overhead in the kernel. Turn it off.
+    write /sys/block/mmcblk0/queue/add_random 0
+    write /sys/block/mmcblk1/queue/add_random 0
+
+    # Set Read Ahead to 256kb
+    write /sys/block/mmcblk0/queue/read_ahead_kb 256
+    write /sys/block/mmcblk1/queue/read_ahead_kb 256
 
     start qcamerasvr
 
