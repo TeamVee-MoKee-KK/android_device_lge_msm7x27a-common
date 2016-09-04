@@ -29,8 +29,14 @@
 BOARD_VENDOR := lge
 
 # Compiler flags
-COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
-COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
+#
+# Need cherry-pick of <http://review.cyanogenmod.org/#/c/113862/>
+# and add of board option flag
+#COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
+#
+# Need cherry-pick of <http://review.cyanogenmod.org/#/c/144831/>
+# and add of board option flag
+#COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
