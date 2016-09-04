@@ -38,4 +38,6 @@ LOCAL_C_INCLUDES += \
 
 LOCAL_SHARED_LIBRARIES := libc libcutils liblog
 
+LOCAL_CLANG := false
+
 include $(BUILD_SHARED_LIBRARY)
