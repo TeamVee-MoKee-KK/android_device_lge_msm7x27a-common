@@ -29,8 +29,6 @@
 BOARD_VENDOR := lge
 
 # Compiler flags
-TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
-TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
 COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
 
