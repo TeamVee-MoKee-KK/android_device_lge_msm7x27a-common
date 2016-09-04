@@ -122,8 +122,8 @@ WIFI_DRIVER_FW_PATH_PARAM        := "/data/misc/wifi/fwpath"
 # Enable Minikin text layout engine (will be the default soon)
 USE_MINIKIN := true
 
-# Use dlmalloc instead of jemalloc for mallocs on low-ram targets
-MALLOC_IMPL := dlmalloc
+# jemalloc for low-ram targets
+MALLOC_SVELTE := true
 
 # Enable dex-preoptimization to speed up first boot sequence
 WITH_DEXPREOPT := true
