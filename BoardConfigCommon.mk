@@ -28,16 +28,6 @@
 # Vendor
 BOARD_VENDOR := lge
 
-# Compiler flags
-#
-# Need cherry-pick of <http://review.cyanogenmod.org/#/c/113862/>
-# and add of board option flag
-#COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
-#
-# Need cherry-pick of <http://review.cyanogenmod.org/#/c/144831/>
-# and add of board option flag
-#COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
-
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
@@ -76,6 +66,7 @@ TARGET_USES_ION := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 TARGET_NO_INITLOGO := true
 TARGET_NO_ADAPTIVE_PLAYBACK := true
+BOARD_CANT_REALLOCATE_OMX_BUFFERS := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
