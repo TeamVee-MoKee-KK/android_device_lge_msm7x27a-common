@@ -3368,7 +3368,8 @@ status_t QCameraHardwareInterface::setCaptureBurstExp()
     char burst_exp[PROPERTY_VALUE_MAX];
     memset(burst_exp, 0, sizeof(burst_exp));
     property_get("persist.capture.burst.exposures", burst_exp, "");
-    mParameters.set("capture-burst-exposures", burst_exp);
+    if (NULL != burst_exp)
+      mParameters.set("capture-burst-exposures", burst_exp);
     return NO_ERROR;
 }
 
@@ -4170,14 +4171,17 @@ void QCameraHardwareInterface::addExifTag(exif_tag_id_t tagid, exif_tag_type_t t
     mExifTableNumEntries++;
 }
 
-rat_t getRational(unsigned int num, unsigned int denom)
+rat_t getRational(int num, int denom)
 {
     rat_t temp = {num, denom};
     return temp;
 }
 
 void QCameraHardwareInterface::initExifData(){
-    addExifTag(EXIFTAGID_EXIF_DATE_TIME_ORIGINAL, EXIF_ASCII, 20, 1, (void *)mExifValues.dateTime);
+    if(mExifValues.dateTime) {
+        addExifTag(EXIFTAGID_EXIF_DATE_TIME_ORIGINAL, EXIF_ASCII,
+                  20, 1, (void *)mExifValues.dateTime);
+    }
     addExifTag(EXIFTAGID_FOCAL_LENGTH, EXIF_RATIONAL, 1, 1, (void *)&(mExifValues.focalLength));
     addExifTag(EXIFTAGID_ISO_SPEED_RATING,EXIF_SHORT,1,1,(void *)&(mExifValues.isoSpeed));
 
@@ -4189,12 +4193,20 @@ void QCameraHardwareInterface::initExifData(){
 
     if(mExifValues.mLatitude) {
         addExifTag(EXIFTAGID_GPS_LATITUDE, EXIF_RATIONAL, 3, 1, (void *)mExifValues.latitude);
-        addExifTag(EXIFTAGID_GPS_LATITUDE_REF, EXIF_ASCII, 2, 1, (void *)mExifValues.latRef);
+
+        if(mExifValues.latRef) {
+            addExifTag(EXIFTAGID_GPS_LATITUDE_REF, EXIF_ASCII, 2,
+                                    1, (void *)mExifValues.latRef);
+        }
     }
 
     if(mExifValues.mLongitude) {
         addExifTag(EXIFTAGID_GPS_LONGITUDE, EXIF_RATIONAL, 3, 1, (void *)mExifValues.longitude);
-        addExifTag(EXIFTAGID_GPS_LONGITUDE_REF, EXIF_ASCII, 2, 1, (void *)mExifValues.lonRef);
+
+        if(mExifValues.lonRef) {
+            addExifTag(EXIFTAGID_GPS_LONGITUDE_REF, EXIF_ASCII, 2,
+                                1, (void *)mExifValues.lonRef);
+        }
     }
 
     if(mExifValues.mAltitude) {
