@@ -32,7 +32,6 @@ BOARD_VENDOR := lge
 TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
 
 # Compiler Optimization
@@ -142,3 +141,6 @@ BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril
 TARGET_RIL_VARIANT := legacy
 TARGET_RIL_SUPPORT_SEEK := true
+
+# Recovery
+BOARD_NO_SECURE_DISCARD := true
