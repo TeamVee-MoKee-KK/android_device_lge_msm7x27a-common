@@ -93,7 +93,7 @@ BOARD_HARDWARE_CLASS := device/lge/msm7x27a-common/cmhw
 
 # SEPolicy
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
+#BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
 
 # WLAN
 BOARD_HAS_QCOM_WLAN              := true
