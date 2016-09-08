@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(LGE_PROJECT),l)
+ifneq ($(filter e610 p700 v1 vee3,$(TARGET_DEVICE)),)
 include $(call all-makefiles-under,$(call my-dir))
 endif
