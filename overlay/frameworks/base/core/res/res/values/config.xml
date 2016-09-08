@@ -118,7 +118,7 @@
     <bool name="config_useSystemClockforRotationSensor">true</bool>
 
     <!-- Show battery fully charged notification -->
-    <bool name="config_showBatteryFullyChargedNotification">true</bool>
+    <!--bool name="config_showBatteryFullyChargedNotification">true</bool-->
 
     <!-- Flag indicating whether the surface flinger has limited
          alpha compositing functionality in hardware.  If set, the window
