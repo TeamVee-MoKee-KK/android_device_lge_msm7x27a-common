@@ -126,8 +126,9 @@ DONT_DEXPREOPT_PREBUILTS := true
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
-# BIONIC: use legacy mmap
+# Bionic
 BOARD_USES_LEGACY_MMAP := true
+TARGET_NEEDS_TEXT_RELOCATIONS := true
 
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
