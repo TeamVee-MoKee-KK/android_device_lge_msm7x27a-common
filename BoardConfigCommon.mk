@@ -119,10 +119,6 @@ USE_MINIKIN := true
 # jemalloc for low-ram targets
 MALLOC_SVELTE := true
 
-# Enable dex-preoptimization to speed up first boot sequence
-WITH_DEXPREOPT := true
-DONT_DEXPREOPT_PREBUILTS := true
-
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
