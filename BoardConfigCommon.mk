@@ -139,3 +139,7 @@ BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril
 TARGET_RIL_VARIANT := legacy
 TARGET_RIL_SUPPORT_SEEK := true
+
+# Only Interpret the system apps due to low space partitions
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
+$(call add-product-dex-preopt-module-config,services,--compiler-filter=space)
