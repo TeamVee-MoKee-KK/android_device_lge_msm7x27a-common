@@ -126,6 +126,10 @@ USE_MINIKIN := true
 # Use dlmalloc instead of jemalloc for mallocs on low-ram targets
 MALLOC_IMPL := dlmalloc
 
+# Enable dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := true
+
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
 
