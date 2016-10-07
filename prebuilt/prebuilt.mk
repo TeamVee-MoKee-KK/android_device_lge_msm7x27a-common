@@ -12,16 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifneq (exists, $(shell test -d $(TOP)/packages/apps/Eleven && echo exists))
+ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Eleven && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_2.27.apk:system/app/BlackPlayer/BlackPlayer.apk
+    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_2.28.apk:system/app/BlackPlayer/BlackPlayer.apk
 endif
 
-ifneq (exists, $(shell test -d $(TOP)/packages/inputmethods/LatinIME && echo exists))
+ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/inputmethods/LatinIME && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/com.google.android.inputmethod.latin_5.1.23.127065177.apk:system/app/GoogleLatinIME/GoogleLatinIME.apk \
     device/lge/msm7x27a-common/prebuilt/app/GoogleLatinIME/lib/libjni_delight4decoder.so:system/lib/libjni_delight4decoder.so
 endif
 
+ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Camera2 && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.32.1.apk:system/app/OpenCamera/OpenCamera.apk
+    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.33.apk:system/app/OpenCamera/OpenCamera.apk
+endif
