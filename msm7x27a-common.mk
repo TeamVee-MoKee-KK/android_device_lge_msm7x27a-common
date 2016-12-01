@@ -107,6 +107,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm7x27a
 
+# Light HAL
+PRODUCT_PACKAGES += \
+    lights.msm7x27a
+
 # EXT4
 PRODUCT_PACKAGES += \
     make_ext4fs \
