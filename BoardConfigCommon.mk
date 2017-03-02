@@ -22,6 +22,20 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
+ifneq ($(filter e610 p700,$(LGE_MSM7X27A_DEVICE)),)
+  LGE_MSM7X27A_GENERATION := 1
+  ifeq ($(LGE_MSM7X27A_DEVICE),e610)
+    LGE_MSM7X27A_PRODUCT := m4
+  endif
+  ifeq ($(LGE_MSM7X27A_DEVICE),p700)
+    LGE_MSM7X27A_PRODUCT := u0
+  endif
+endif
+ifneq ($(filter v1 vee3,$(LGE_MSM7X27A_DEVICE)),)
+  LGE_MSM7X27A_GENERATION := 2
+  LGE_MSM7X27A_PRODUCT := $(LGE_MSM7X27A_DEVICE)
+endif
+
 # inherit from the proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 
@@ -33,7 +47,6 @@ TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 COMMON_GLOBAL_CFLAGS += -DBOARD_CANT_REALLOCATE_OMX_BUFFERS
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
-COMMON_GLOBAL_CFLAGS += -DUSE_LEGACY_BLOBS
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
@@ -127,7 +140,7 @@ USE_MINIKIN := true
 MALLOC_IMPL := dlmalloc
 
 # Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(PRODUCT_DEVICE),v1 vee3)
+ifeq ($(LGE_MSM7X27A_GENERATION),2)
   ifeq ($(HOST_OS),linux)
     ifeq ($(WITH_DEXPREOPT),)
         WITH_DEXPREOPT := true
@@ -151,7 +164,7 @@ TARGET_RIL_VARIANT := legacy
 TARGET_RIL_SUPPORT_SEEK := true
 
 # Only Interpret the system apps due to low space partitions
-ifeq ($(PRODUCT_DEVICE),e610 p700)
+ifeq ($(LGE_MSM7X27A_DEVICE),1)
   PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
   $(call add-product-dex-preopt-module-config,services,--compiler-filter=space)
 endif
