@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-BLACKPLAYER_VERSION := 2.31
-OPENCAMERA_VERSION := 1.35
+BLACKPLAYER_VERSION := 2.34
+OPENCAMERA_VERSION := 1.37
 
 ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Eleven && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
