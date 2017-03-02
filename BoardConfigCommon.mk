@@ -37,7 +37,7 @@ ifneq ($(filter v1 vee3,$(LGE_MSM7X27A_DEVICE)),)
 endif
 
 # inherit from the proprietary version
--include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
+include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 
 # Vendor
 BOARD_VENDOR := lge
@@ -74,6 +74,7 @@ TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x1200000
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_CMDLINE := androidboot.hardware=$(LGE_MSM7X27A_PRODUCT) androidboot.selinux=permissive
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -114,6 +115,16 @@ BOARD_HARDWARE_CLASS := device/lge/msm7x27a-common/cmhw
 # SEPolicy
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
+
+# Recovery FSTAB
+TARGET_RECOVERY_FSTAB := device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/root/fstab.$(LGE_MSM7X27A_PRODUCT)
+
+# BT Include
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/$(LGE_MSM7X27A_DEVICE)/bluetooth
+
+ifeq ($(LGE_MSM7X27A_GENERATION),2)
+NEW_INPUT_AUDIO_HAL := true
+endif
 
 # WLAN
 BOARD_HAS_QCOM_WLAN              := true

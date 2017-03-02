@@ -33,6 +33,12 @@ $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/msm7x27a-common/overlay
 
+DEVICE_PACKAGE_OVERLAYS += device/lge/$(LGE_MSM7X27A_DEVICE)/overlay
+
+ifeq ($(LGE_MSM7X27A_DEVICE),1)
+TARGET_BOOTANIMATION_HALF_RES := true
+endif
+
 # Common ramdisk
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/root/fstab.lge.shared:root/fstab.lge.shared \
@@ -67,6 +73,22 @@ PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin \
     device/lge/msm7x27a-common/rootdir/system/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
     device/lge/msm7x27a-common/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
+endif
+
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/rootdir/system/etc/gen$(LGE_MSM7X27A_GENERATION)_media_profiles.xml:system/etc/media_profiles.xml
+
+PRODUCT_COPY_FILES += \
+    device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/root/fstab.$(LGE_MSM7X27A_PRODUCT):root/fstab.$(LGE_MSM7X27A_PRODUCT) \
+    device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/root/init.$(LGE_MSM7X27A_PRODUCT).rc:root/init.$(LGE_MSM7X27A_PRODUCT).rc \
+    device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/root/ueventd.$(LGE_MSM7X27A_PRODUCT).rc:root/ueventd.$(LGE_MSM7X27A_PRODUCT).rc
+
+PRODUCT_COPY_FILES += \
+    device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/system/usr/keylayout/$(LGE_MSM7X27A_PRODUCT)_keypad.kl:system/usr/keylayout/$(LGE_MSM7X27A_PRODUCT)_keypad.kl \
+
+ifeq ($(LGE_MSM7X27A_DEVICE),1)
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/recovery/root/sbin/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 endif
 
 # Permission files
@@ -133,6 +155,12 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.msm7x27a
+
+# HWComposer
+ifeq ($(LGE_MSM7X27A_DEVICE),1)
+PRODUCT_PACKAGES += \
+    hwcomposer.msm7x27a
+endif
 
 # EXT4
 PRODUCT_PACKAGES += \
