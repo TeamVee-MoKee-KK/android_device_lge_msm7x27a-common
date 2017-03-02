@@ -127,8 +127,14 @@ USE_MINIKIN := true
 MALLOC_IMPL := dlmalloc
 
 # Enable dex-preoptimization to speed up first boot sequence
-WITH_DEXPREOPT := true
-DONT_DEXPREOPT_PREBUILTS := true
+ifeq ($(PRODUCT_DEVICE),v1 vee3)
+  ifeq ($(HOST_OS),linux)
+    ifeq ($(WITH_DEXPREOPT),)
+        WITH_DEXPREOPT := true
+        DONT_DEXPREOPT_PREBUILTS := true
+    endif
+  endif
+endif
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -145,5 +151,7 @@ TARGET_RIL_VARIANT := legacy
 TARGET_RIL_SUPPORT_SEEK := true
 
 # Only Interpret the system apps due to low space partitions
-PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
-$(call add-product-dex-preopt-module-config,services,--compiler-filter=space)
+ifeq ($(PRODUCT_DEVICE),e610 p700)
+  PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := --compiler-filter=interpret-only
+  $(call add-product-dex-preopt-module-config,services,--compiler-filter=space)
+endif
