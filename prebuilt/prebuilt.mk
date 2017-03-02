@@ -17,7 +17,7 @@ PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_2.31.apk:system/app/BlackPlayer/BlackPlayer.apk
 endif
 
-#ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Camera2 && echo not_use_prebuilt))
-#PRODUCT_COPY_FILES += \
-#    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.35.apk:system/app/OpenCamera/OpenCamera.apk
-#endif
+ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Camera2 && echo not_use_prebuilt))
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.35.apk:system/app/OpenCamera/OpenCamera.apk
+endif
