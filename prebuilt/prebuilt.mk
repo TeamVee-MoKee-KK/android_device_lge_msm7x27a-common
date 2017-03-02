@@ -12,12 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+BLACKPLAYER_VERSION := 2.31
+OPENCAMERA_VERSION := 1.35
+
 ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Eleven && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_2.31.apk:system/app/BlackPlayer/BlackPlayer.apk
+    device/lge/msm7x27a-common/prebuilt/app/BlackPlayer/com.kodarkooperativet.blackplayerfree_$(BLACKPLAYER_VERSION).apk:system/app/BlackPlayer/BlackPlayer.apk
 endif
 
 ifneq (not_use_prebuilt, $(shell test -d $(TOP)/packages/apps/Camera2 && echo not_use_prebuilt))
 PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_1.35.apk:system/app/OpenCamera/OpenCamera.apk
+    device/lge/msm7x27a-common/prebuilt/app/OpenCamera/net.sourceforge.opencamera_$(OPENCAMERA_VERSION).apk:system/app/OpenCamera/OpenCamera.apk
 endif
