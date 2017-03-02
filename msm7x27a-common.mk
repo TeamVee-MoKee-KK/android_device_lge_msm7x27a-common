@@ -249,3 +249,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Disable atlas services on low-ram targets
 PRODUCT_PROPERTY_OVERRIDES += \
     config.disable_atlas="true"
+
+# Reduce background apps limit to 8 on low-tier devices
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.fw.bg_apps_limit="8"
