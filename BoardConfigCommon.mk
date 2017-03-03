@@ -22,18 +22,21 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-ifneq ($(filter e610 p700,$(LGE_MSM7X27A_DEVICE)),)
+ifeq ($(LGE_MSM7X27A_DEVICE),e610)
   LGE_MSM7X27A_GENERATION := 1
-  ifeq ($(LGE_MSM7X27A_DEVICE),e610)
-    LGE_MSM7X27A_PRODUCT := m4
-  endif
-  ifeq ($(LGE_MSM7X27A_DEVICE),p700)
-    LGE_MSM7X27A_PRODUCT := u0
-  endif
+  LGE_MSM7X27A_PRODUCT := m4
 endif
-ifneq ($(filter v1 vee3,$(LGE_MSM7X27A_DEVICE)),)
+ifeq ($(LGE_MSM7X27A_DEVICE),p700)
+  LGE_MSM7X27A_GENERATION := 1
+  LGE_MSM7X27A_PRODUCT := u0
+endif
+ifeq ($(LGE_MSM7X27A_DEVICE),v1)
   LGE_MSM7X27A_GENERATION := 2
-  LGE_MSM7X27A_PRODUCT := $(LGE_MSM7X27A_DEVICE)
+  LGE_MSM7X27A_PRODUCT := v1
+endif
+ifeq ($(LGE_MSM7X27A_DEVICE),vee3)
+  LGE_MSM7X27A_GENERATION := 2
+  LGE_MSM7X27A_PRODUCT := vee3
 endif
 
 # inherit from the proprietary version
