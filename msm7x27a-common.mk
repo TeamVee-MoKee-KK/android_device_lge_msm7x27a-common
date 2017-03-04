@@ -280,10 +280,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api="1"
 
 # ART
+ifeq ($(LGE_MSM7X27A_DEVICE),1)
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-filter="balanced" \
-    dalvik.vm.dex2oat-swap="false" \
     dalvik.vm.image-dex2oat-filter="speed"
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-swap="false"
 
 # For applications to determine if they should turn off specific memory-intensive
 # features that work poorly on low-memory devices.
