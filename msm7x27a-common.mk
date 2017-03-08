@@ -210,3 +210,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.disable="1" \
     af.resampler.quality="4"
+
+# Low Memory Props
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.fw.bg_apps_limit="16" \
+    ro.config.max_starting_bg="1"
