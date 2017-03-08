@@ -1,4 +1,4 @@
-ifeq ($(call my-dir),$(call project-path-for,qcom-media))
+ifneq ($(filter e610 p700 v1 vee3,$(LGE_MSM7X27A_DEVICE)),)
 
 ifneq ($(filter msm7x27a,$(TARGET_BOARD_PLATFORM)),)
 
