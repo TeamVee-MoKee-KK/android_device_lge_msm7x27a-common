@@ -29,6 +29,9 @@ ifeq ($(LGE_MSM7X27A_DEVICE),vee3)
   LGE_MSM7X27A_PRODUCT := vee3
 endif
 
+# QCOM display HAL
+$(call project-set-path,qcom-display,device/lge/msm7x27a-common/display)
+
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, device/lge/msm7x27a-common/prebuilt/prebuilt.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)

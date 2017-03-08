@@ -1,12 +1,12 @@
 #Common headers
-common_includes := $(call project-path-for,qcom-display)/libgralloc
-common_includes += $(call project-path-for,qcom-display)/liboverlay
-common_includes += $(call project-path-for,qcom-display)/libcopybit
-common_includes += $(call project-path-for,qcom-display)/libqdutils
-common_includes += $(call project-path-for,qcom-display)/libhwcomposer
-common_includes += $(call project-path-for,qcom-display)/libexternal
-common_includes += $(call project-path-for,qcom-display)/libqservice
-common_includes += $(call project-path-for,qcom-display)/libvirtual
+common_includes := device/lge/msm7x27a-common/display/libgralloc
+common_includes += device/lge/msm7x27a-common/display/liboverlay
+common_includes += device/lge/msm7x27a-common/display/libcopybit
+common_includes += device/lge/msm7x27a-common/display/libqdutils
+common_includes += device/lge/msm7x27a-common/display/libhwcomposer
+common_includes += device/lge/msm7x27a-common/display/libexternal
+common_includes += device/lge/msm7x27a-common/display/libqservice
+common_includes += device/lge/msm7x27a-common/display/libvirtual
 common_includes += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 
 common_header_export_path := qcom/display
