@@ -172,7 +172,7 @@ BOARD_USES_LEGACY_MMAP := true
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 
 # RIL
-BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril
+BOARD_RIL_CLASS += ../../../device/lge/msm7x27a-common/ril_class
 TARGET_RIL_VARIANT := legacy
 TARGET_RIL_SUPPORT_SEEK := true
 
