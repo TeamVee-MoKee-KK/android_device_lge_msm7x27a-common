@@ -17,14 +17,10 @@ LOCAL_SHARED_LIBRARIES := \
 # Disable usage of Clang Toolchain here
 LOCAL_CLANG := false
 
-LOCAL_CFLAGS :=
+LOCAL_CFLAGS := -DRIL_VARIANT_LEGACY
 
 ifeq ($(TARGET_RIL_SUPPORT_SEEK),true)
     LOCAL_CFLAGS += -DRIL_SUPPORTS_SEEK
-endif
-
-ifeq ($(TARGET_RIL_VARIANT),legacy)
-    LOCAL_CFLAGS += -DRIL_VARIANT_LEGACY
 endif
 
 LOCAL_MODULE := libril

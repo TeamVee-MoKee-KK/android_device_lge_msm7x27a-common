@@ -1,7 +1,6 @@
-LOCAL_PATH := $(call my-dir)
-
 ifeq ($(USE_DEVICE_SPECIFIC_CAMERA),true)
 
+LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.

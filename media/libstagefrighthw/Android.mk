@@ -18,22 +18,27 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    QComOMXPlugin.cpp                      \
+    QComOMXPlugin.cpp
 
 LOCAL_CFLAGS := $(PV_CFLAGS_MINUS_VISIBILITY)
 
-LOCAL_C_INCLUDES:= \
-        frameworks/native/include/media/openmax \
-        frameworks/native/include/media/hardware
+LOCAL_ADDITIONAL_DEPENDENCIES :=
+LOCAL_C_INCLUDES := \
+    frameworks/native/include/media/openmax \
+    frameworks/native/include/media/hardware
 
-LOCAL_SHARED_LIBRARIES :=       \
-        libbinder               \
-        libutils                \
-        libcutils               \
-        libdl                   \
-        libui                   \
+ifeq ($(call is-vendor-board-platform,QCOM),true)
+    LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
+    LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+endif
+
+LOCAL_SHARED_LIBRARIES := \
+    libbinder \
+    libutils \
+    libcutils \
+    libdl \
+    libui
 
 LOCAL_MODULE := libstagefrighthw
 
 include $(BUILD_SHARED_LIBRARY)
-

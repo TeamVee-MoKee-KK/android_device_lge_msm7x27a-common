@@ -18,11 +18,7 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_CLANG := false
 
 # for asprinf
-LOCAL_CFLAGS := -D_GNU_SOURCE
-
-ifeq ($(TARGET_RIL_VARIANT),legacy)
-    LOCAL_CFLAGS += -DRIL_VARIANT_LEGACY
-endif
+LOCAL_CFLAGS := -D_GNU_SOURCE -DRIL_VARIANT_LEGACY
 
 LOCAL_C_INCLUDES := $(KERNEL_HEADERS)
 
@@ -38,16 +34,9 @@ ifeq ($(TARGET_DEVICE),dream)
     LOCAL_CFLAGS += -DPOLL_CALL_STATE -DUSE_QMI
 endif
 
-ifeq (foo,foo)
-    # build shared library
-    LOCAL_CFLAGS += -DRIL_SHLIB
+# build shared library
+LOCAL_CFLAGS += -DRIL_SHLIB
 
-    LOCAL_MODULE := libreference-ril
+LOCAL_MODULE := libreference-ril
 
-    include $(BUILD_SHARED_LIBRARY)
-else
-    # build executable
-    LOCAL_MODULE := reference-ril
-
-    include $(BUILD_EXECUTABLE)
-endif
+include $(BUILD_SHARED_LIBRARY)

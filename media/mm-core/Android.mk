@@ -1,5 +1,3 @@
-ifneq ($(BUILD_TINY_ANDROID),true)
-
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -96,5 +94,3 @@ LOCAL_SRC_FILES         += src/common/qc_omx_core.c
 LOCAL_SRC_FILES         += src/$(MM_CORE_TARGET)/qc_registry_table.c
 
 include $(BUILD_SHARED_LIBRARY)
-
-endif #BUILD_TINY_ANDROID
