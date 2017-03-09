@@ -29,13 +29,7 @@ ifeq ($(LGE_MSM7X27A_DEVICE),vee3)
   LGE_MSM7X27A_PRODUCT := vee3
 endif
 
-# QCOM display HAL
-$(call project-set-path,qcom-display,device/lge/msm7x27a-common/display)
-
-# QCOM media HAL
-$(call project-set-path,qcom-media,device/lge/msm7x27a-common/media)
-
-# QCOM ril HAL
+# Force QCOM RIL HAL
 $(call project-set-path,ril,device/lge/msm7x27a-common/ril)
 
 $(call inherit-product, device/common/gps/gps_us_supl.mk)

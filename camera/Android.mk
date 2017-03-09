@@ -40,9 +40,9 @@ endif
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 LOCAL_C_INCLUDES += \
-     device/lge/msm7x27a-common/display/libgralloc \
-     device/lge/msm7x27a-common/media/libstagefrighthw \
-     device/lge/msm7x27a-common/media/mm-core/inc \
+     $(call project-path-for,qcom-display)/libgralloc \
+     $(call project-path-for,qcom-media)/libstagefrighthw \
+     $(call project-path-for,qcom-media)/mm-core/inc \
      frameworks/base/services/camera/libcameraservice \
      frameworks/native/include/media/hardware \
      system/media/camera/include \
