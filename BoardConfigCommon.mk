@@ -123,7 +123,7 @@ BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
 TARGET_RECOVERY_FSTAB := device/lge/$(LGE_MSM7X27A_DEVICE)/rootdir/root/fstab.$(LGE_MSM7X27A_PRODUCT)
 
 # BT Include
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/$(LGE_MSM7X27A_DEVICE)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/msm7x27a-common/bluetooth
 
 ifeq ($(LGE_MSM7X27A_GENERATION),2)
 NEW_INPUT_AUDIO_HAL := true
