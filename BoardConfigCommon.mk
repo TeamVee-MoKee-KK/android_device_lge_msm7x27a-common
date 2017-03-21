@@ -104,7 +104,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Hardware
-BOARD_HARDWARE_CLASS := device/lge/msm7x27a-common/cmhw
+BOARD_HARDWARE_CLASS := device/lge/msm7x27a-common/mkhw
 
 # SEPolicy
 BOARD_SEPOLICY_DIRS += device/lge/msm7x27a-common/sepolicy
